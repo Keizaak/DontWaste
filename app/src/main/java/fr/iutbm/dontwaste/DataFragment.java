@@ -3,6 +3,7 @@ package fr.iutbm.dontwaste;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -28,12 +29,9 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class DataFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -43,8 +41,12 @@ public class DataFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private SharedPreferences sharedPref;
-    private TextView tv_loc_enabled_out = null;
+    //private TextView tv_loc_enabled_out = null;
+
     private View root = null;
+
+    private AppDatabase appdb;
+    private MealDAO mealDAO;
 
     public DataFragment() {
         // Required empty public constructor
@@ -86,25 +88,33 @@ public class DataFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(new MealListAdapter(mealList));
-        prepareMealData();
+        //recyclerView.setAdapter(new MealListAdapter(mealList));
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        if (!(sharedPref.getBoolean(getResources().getString(R.string.key_initbdd), false))) {
+            prepareMealData();
+            sharedPref.edit().putBoolean("key_init_bdd", true).apply();
+        }
+        mealDAO = ((AppDatabase.getDatabase(getContext())).mealDAO());
+        (new GetAllMealsAsyncTask(mealDAO)).execute();
+
         return root;
     }
 
     public void updateUI(){
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        /*sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         Boolean locationEnabled =
                 sharedPref.getBoolean(getResources().getString(R.string.key_location_switch), false);
         String isLocationEnable = ": ";
         isLocationEnable += locationEnabled ? "True" : "False";
         tv_loc_enabled_out = (TextView) root.findViewById(R.id.text_location_switch_out);
-        tv_loc_enabled_out.setText(isLocationEnable);
+        tv_loc_enabled_out.setText(isLocationEnable);*/
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        updateUI();
+        //updateUI();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -149,8 +159,47 @@ public class DataFragment extends Fragment {
     public void prepareMealData(){
         Meal m1, m2, m3;
 
-        m1 = new Meal("Pâtes carbonara", "carbonara.png", 3.0f, 47.642900f, 6.840027f);
-        m2 = new Meal("Couscous", "couscous.png", 5.0f, 47.659518f, 6.813337f);
-        m3 = new Meal("Salade composée", "salade.png", 2.0f, 47.6387143f, 6.8370225f);
+        m1 = new Meal("Pâtes carbonara", "carbonara.jpg", 3.0f, 47.642900f, 6.840027f);
+        m2 = new Meal("Couscous", "couscous.jpg", 5.0f, 47.659518f, 6.813337f);
+        m3 = new Meal("Salade composée", "salade.jpg", 2.0f, 47.6387143f, 6.8370225f);
+        mealDAO = ((AppDatabase.getDatabase(getContext())).mealDAO());
+        (new InsertAsyncTask(mealDAO)).execute(m1, m2, m3);
+    }
+
+    private class InsertAsyncTask extends AsyncTask<Meal, Void, Void> {
+
+        private MealDAO dao;
+        InsertAsyncTask(MealDAO dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Meal... params) {
+            for (Meal m : params) {
+                this.dao.insertMeals(m);
+            }
+            return null;
+        }
+    }
+
+    private class GetAllMealsAsyncTask extends AsyncTask<Meal, Void, Void> {
+
+        private MealDAO dao;
+
+        GetAllMealsAsyncTask(MealDAO dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Meal... params) {
+            mealList = dao.getAllMeals();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void voids) {
+            super.onPostExecute(voids);
+            recyclerView.setAdapter(new MealListAdapter(mealList, getContext()));
+        }
     }
 }

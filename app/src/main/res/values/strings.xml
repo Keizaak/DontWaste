@@ -29,4 +29,6 @@
     <string name="key_location_switch">key_location_switch</string>
     <!---->
 
+    <string name="key_initbdd">key_init_bdd</string>
+
 </resources>

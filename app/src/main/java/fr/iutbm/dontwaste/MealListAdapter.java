@@ -1,5 +1,6 @@
 package fr.iutbm.dontwaste;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,11 @@ import java.util.List;
 public class MealListAdapter extends RecyclerView.Adapter<MealViewHolder> {
 
     private List<Meal> mealList;
+    private Context context;
 
-    public MealListAdapter(List<Meal> mealList){
+    public MealListAdapter(List<Meal> mealList, Context context) {
         this.mealList = mealList;
+        this.context = context;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class MealListAdapter extends RecyclerView.Adapter<MealViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder( MealViewHolder holder, int position) {
+    public void onBindViewHolder(MealViewHolder holder, int position) {
         Meal meal = mealList.get(position);
         holder.mealNameView.setText(meal.getMealName());
         holder.latitudeView.setText("" + meal.getLatitude());
