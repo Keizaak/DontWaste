@@ -1,11 +1,14 @@
 package fr.iutbm.dontwaste;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class MealListAdapter extends RecyclerView.Adapter<MealViewHolder> {
@@ -31,15 +34,16 @@ public class MealListAdapter extends RecyclerView.Adapter<MealViewHolder> {
         holder.latitudeView.setText("" + meal.getLatitude());
         holder.longitudeView.setText("" + meal.getLongitude());
 
-//        try {
-//            String imageName = meal.getBmppath();
-//            InputStream ims = context.getAssets().open(imageName);
-//            Drawable d = Drawable.createFromStream(ims, null);
-//            holder.pictureView.setImageDrawable(d);
-//            ims.close();
-//        } catch (IOException ex){
-//            return;
-//        }
+        try {
+            String imageName= meal.getBmppath();
+            InputStream ims = context.getAssets().open(imageName);
+            Drawable d = Drawable.createFromStream(ims, null);
+            holder.pictureView.setImageDrawable(d);
+            ims.close();
+        }
+        catch(IOException ex) {
+            return;
+        }
     }
 
     @Override
