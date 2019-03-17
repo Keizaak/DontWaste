@@ -5,9 +5,6 @@
         android:key="@string/key_location_switch"
         android:title="@string/pref_location_switch" />
 
-    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
-    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-
     <EditTextPreference
         android:defaultValue="100"
         android:inputType="number"
@@ -19,12 +16,13 @@
         android:dependency="@string/key_location_switch" />
 
     <EditTextPreference
-        android:defaultValue="100"
-        android:inputType="number"
+        android:defaultValue="1.0"
+        android:inputType="numberDecimal"
         android:title="@string/pref_search_radius_edit_text"
         android:key="@string/key_search_radius"
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:dependency="@string/key_location_switch" />
+
 </PreferenceScreen>

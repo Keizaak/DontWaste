@@ -17,10 +17,9 @@
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
-    <string name="pref_header_general">General</string>
+    <string name="pref_header_general">Location</string>
 
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_location_switch">Location Enabled</string>
+    <string name="pref_location_switch">Location enabled</string>
     <string name="pref_search_radius_edit_text">Search radius</string>
     <string name="pref_search_delay_edit_text">Search delay</string>
 
@@ -28,4 +27,6 @@
     <string name="key_search_delay">key_search_delay</string>
     <string name="key_search_radius">key_search_radius</string>
     <string name="key_location_switch">key_location_switch</string>
+    <!---->
+
 </resources>
