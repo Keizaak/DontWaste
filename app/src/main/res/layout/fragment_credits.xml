@@ -9,18 +9,18 @@
     android:gravity="center"
     tools:context=".CreditsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/credits_text" />
-
     <ImageView
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"
-        android:id="@+id/imageView2"/>
+        android:id="@+id/imageView2"
+        android:contentDescription="@string/icon_despcription" />
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_text" />
 
 </LinearLayout>
