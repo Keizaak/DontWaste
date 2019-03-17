@@ -1,8 +1,10 @@
 package fr.iutbm.dontwaste;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -11,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,10 @@ public class DataFragment extends Fragment {
 
     private List<Meal> mealList = new ArrayList<>();
     private RecyclerView recyclerView;
+
+    private SharedPreferences sharedPref;
+    private TextView tv_loc_enabled_out = null;
+    private View root = null;
 
     public DataFragment() {
         // Required empty public constructor
@@ -73,18 +80,31 @@ public class DataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.fragment_data, container, false);
-
-        recyclerView = v.findViewById(R.id.meal_recycler_view);
+        // Inflate the layout for this fragment
+        root = inflater.inflate(R.layout.fragment_data, container, false);
+        recyclerView = root.findViewById(R.id.meal_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(new MealListAdapter(mealList));
-
         prepareMealData();
+        return root;
+    }
 
-        return v;
+    public void updateUI(){
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Boolean locationEnabled =
+                sharedPref.getBoolean(getResources().getString(R.string.key_location_switch), false);
+        String isLocationEnable = ": ";
+        isLocationEnable += locationEnabled ? "True" : "False";
+        tv_loc_enabled_out = (TextView) root.findViewById(R.id.text_location_switch_out);
+        tv_loc_enabled_out.setText(isLocationEnable);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateUI();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
