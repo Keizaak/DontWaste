@@ -12,8 +12,18 @@
     <string name="nav_map">Map</string>
     <string name="nav_credits">About us</string>
 
-    <string name="icon_despcription">DontWaste app icon</string>
-    <string name="credits_text">Application realized by Camille GUIGNOL, Chloé VIEILLE, Dylan JACQUEMIN and Luka LAMBALOT</string>
+    <string name="icon_description">DontWaste app icon</string>
+    <string name="credits_text">Application realized by Dylan JACQUEMIN, Camille GUIGNOL, Luka LAMBALOT and Chloé VIEILLE</string>
+    <string name="home_title">We have a great challenge together: food waste</string>
+    <string name="home_text">Tons of food are lost all along the food chain, from field to plate.
+        And it\'s not just the food that\'s wasted, but all the resources that made it possible to produce it:
+        from water to farmland, to work, energy and everything else.
+        \n
+
+        \n
+        At Don\'t Waste, we work for a world with meaning, where the food produced is consumed and does not end up tragically wasted.
+        All our small actions, put end to end, can have an immense impact!
+    </string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
@@ -27,8 +37,7 @@
     <string name="key_search_delay">key_search_delay</string>
     <string name="key_search_radius">key_search_radius</string>
     <string name="key_location_switch">key_location_switch</string>
-    <!---->
 
     <string name="key_initbdd">key_init_bdd</string>
-
+    <!---->
 </resources>

@@ -159,9 +159,9 @@ public class DataFragment extends Fragment {
     public void prepareMealData(){
         Meal m1, m2, m3;
 
-        m1 = new Meal("Pâtes carbonara", "carbonara.jpg", 3.0f, 47.642900f, 6.840027f);
-        m2 = new Meal("Couscous", "couscous.jpg", 5.0f, 47.659518f, 6.813337f);
-        m3 = new Meal("Salade composée", "salade.jpg", 2.0f, 47.6387143f, 6.8370225f);
+        m1 = new Meal("Pâtes carbonara", "carbonara.jpg", 3.0f, "Bernard L.", 47.642900f, 6.840027f);
+        m2 = new Meal("Couscous", "couscous.jpg", 5.0f, "bestcook90", 47.659518f, 6.813337f);
+        m3 = new Meal("Salade composée", "salade.jpg", 2.0f, "Nadia A.", 47.6387143f, 6.8370225f);
         mealDAO = ((AppDatabase.getDatabase(getContext())).mealDAO());
         (new InsertAsyncTask(mealDAO)).execute(m1, m2, m3);
     }

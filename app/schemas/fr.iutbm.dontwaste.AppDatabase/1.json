@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4ef910a0d0cef047bc58a810c7a96029",
+    "identityHash": "182ca12f16a5eebf009e4625c52a79f0",
     "entities": [
       {
         "tableName": "meals",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mealname` TEXT, `bmppath` TEXT, `price` REAL NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mealname` TEXT, `bmppath` TEXT, `price` REAL NOT NULL, `userName` TEXT, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -33,6 +33,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "userName",
+            "columnName": "userName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "latitude",
             "columnName": "latitude",
             "affinity": "REAL",
@@ -57,7 +63,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"4ef910a0d0cef047bc58a810c7a96029\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"182ca12f16a5eebf009e4625c52a79f0\")"
     ]
   }
 }

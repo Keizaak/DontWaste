@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 
 import android.net.Uri;
@@ -29,10 +30,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -197,7 +200,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
                 LatLng pos = new LatLng(meal.getLatitude(), meal.getLongitude());
                 builder.include(pos);
                 LatLngBounds bounds = builder.build();
-                mGoogleMap.addMarker(new MarkerOptions().position(pos).title(meal.getMealName()).alpha(0.5f));
+                mGoogleMap.addMarker(new MarkerOptions().position(pos).title(meal.getMealName()).alpha(0.5f).snippet(meal.getPrice() + " €"));
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
             }
         }
@@ -210,9 +213,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
         } else {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if(mLastLocation != null){
-                String lats = "" + mLastLocation.getLatitude();
-                String longs = "" + mLastLocation.getLongitude();
-                Toast.makeText(getActivity(), lats + " " + longs, Toast.LENGTH_LONG).show();
+                LatLng userPos = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                mGoogleMap.addMarker(new MarkerOptions().position(userPos).title("You").icon(BitmapDescriptorFactory.defaultMarker(150f)));
             }
         }
 
@@ -251,18 +253,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         if(location != null){
-            Toast.makeText(getActivity(), location.getLatitude() + " " + location.getLongitude(), Toast.LENGTH_LONG).show();
-
-            int radius = Integer.parseInt(sharedPreferences.getString(getResources().getString(R.string.key_search_radius), "10"));
+            int radius = Integer.parseInt(sharedPreferences.getString(getResources().getString(R.string.key_search_radius), "100"));
 
             mGoogleMap.clear();
             LatLngBounds.Builder builder = LatLngBounds.builder();
+
+            LatLng userPos = new LatLng(location.getLatitude(), location.getLongitude());
+            mGoogleMap.addMarker(new MarkerOptions().position(userPos).title("You").icon(BitmapDescriptorFactory.defaultMarker(150f)));
 
             for(Meal meal : mealList){
                 LatLng pos = new LatLng(meal.getLatitude(), meal.getLongitude());
                 builder.include(pos);
 
-                MarkerOptions markerOptions = new MarkerOptions().position(pos).title(meal.getMealName()).alpha(0.5f);
+                MarkerOptions markerOptions = new MarkerOptions().position(pos).title(meal.getMealName()).alpha(0.5f).snippet(meal.getPrice() + " €");
 
                 Location mealLocation = new Location("");
                 mealLocation.setLatitude(meal.getLatitude());

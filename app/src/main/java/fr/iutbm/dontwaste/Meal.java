@@ -20,26 +20,32 @@ public class Meal {
     @ColumnInfo(name = "price")
     private float price;
 
+    @ColumnInfo(name = "userName")
+    private String userName;
+
     @ColumnInfo(name = "latitude")
     private float latitude;
 
     @ColumnInfo(name = "longitude")
     private float longitude;
 
-    public Meal(String mealName, String bmppath, float price, float latitude, float longitude) {
+
+    public Meal(String mealName, String bmppath, float price, String userName, float latitude, float longitude) {
         this.mealName = mealName;
         this.bmppath = bmppath;
         this.price = price;
+        this.userName = userName;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
     @Ignore
-    public Meal(int uid, String mealName, String bmppath, float price, float latitude, float longitude) {
+    public Meal(int uid, String mealName, String bmppath, float price, String userName, float latitude, float longitude) {
         this.uid = uid;
         this.mealName = mealName;
         this.bmppath = bmppath;
         this.price = price;
+        this.userName = userName;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -74,6 +80,14 @@ public class Meal {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public float getLatitude() {

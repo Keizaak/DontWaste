@@ -40,15 +40,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_view_meal_latitude"
+                android:id="@+id/text_view_meal_userName"
                 android:paddingRight="16dp"
-                android:text="Latitude "/>
+                android:text="User Name"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_view_meal_longitude"
-                android:text="Longitude "/>
+                android:id="@+id/text_view_meal_price"
+                android:text="Price"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -31,8 +31,8 @@ public class MealListAdapter extends RecyclerView.Adapter<MealViewHolder> {
     public void onBindViewHolder(MealViewHolder holder, int position) {
         Meal meal = mealList.get(position);
         holder.mealNameView.setText(meal.getMealName());
-        holder.latitudeView.setText("" + meal.getLatitude());
-        holder.longitudeView.setText("" + meal.getLongitude());
+        holder.userNameView.setText("Added by " + meal.getUserName());
+        holder.priceView.setText("Price: " + meal.getPrice() + " €");
 
         try {
             String imageName= meal.getBmppath();
