@@ -6,54 +6,6 @@
     android:orientation="vertical"
     tools:context=".DataFragment">
 
-<!--    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pref_location_switch" />
-
-        <TextView
-            android:id="@+id/text_location_switch_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pref_search_delay_edit_text" />
-
-        <TextView
-            android:id="@+id/text_search_delay_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pref_search_radius_edit_text" />
-
-        <TextView
-            android:id="@+id/text_search_radius_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>-->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/meal_recycler_view"
         android:layout_width="match_parent"

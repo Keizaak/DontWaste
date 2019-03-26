@@ -41,7 +41,6 @@ public class DataFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private SharedPreferences sharedPref;
-    //private TextView tv_loc_enabled_out = null;
 
     private View root = null;
 

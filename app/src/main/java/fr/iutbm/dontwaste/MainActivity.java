@@ -35,10 +35,11 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.contact);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                openContactForm();
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -56,6 +57,11 @@ public class MainActivity extends AppCompatActivity
         fm = getSupportFragmentManager();
         fragment = new HomeFragment();
         fm.beginTransaction().replace(R.id.content_main, fragment).commit();
+    }
+
+    public void openContactForm(){
+        Intent intent = new Intent(this, ContactFormView.class);
+        startActivity(intent);
     }
 
     @Override
