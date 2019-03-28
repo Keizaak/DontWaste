@@ -1,6 +1,7 @@
 package fr.iutbm.dontwaste;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class MealListAdapter extends RecyclerView.Adapter<MealViewHolder> {
@@ -33,18 +36,22 @@ public class MealListAdapter extends RecyclerView.Adapter<MealViewHolder> {
         holder.userNameView.setText("Added by " + meal.getUserName());
         holder.priceView.setText("Price: " + meal.getPrice() + " €");
 
-        /*try {
-            String imageName = meal.getBmppath();
-            InputStream ims = context.getAssets().open(imageName);
-            Drawable d = Drawable.createFromStream(ims, null);
-            holder.pictureView.setImageDrawable(d);
-            ims.close();
+        if (position < 3) {
+            try {
+                String imageName = meal.getBmppath();
+                InputStream ims = context.getAssets().open(imageName);
+                Drawable d = Drawable.createFromStream(ims, null);
+                holder.pictureView.setImageDrawable(d);
+                ims.close();
+            }
+            catch(IOException ex) {
+                return;
+            }
         }
-        catch(IOException ex) {
-            return;
-        }*/
+        else {
+            holder.pictureView.setImageURI(Uri.parse(meal.getBmppath()));
+        }
 
-        holder.pictureView.setImageURI(Uri.parse(meal.getBmppath()));
     }
 
     @Override
