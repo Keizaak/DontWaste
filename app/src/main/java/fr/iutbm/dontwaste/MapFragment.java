@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -69,6 +70,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
     private GoogleMap mGoogleMap;
 
+    private SharedPreferences sharedPreferences;
+
 
     public MapFragment() {
         // Required empty public constructor
@@ -107,6 +110,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
                     .addApi(LocationServices.API)
                     .build();
         }
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
 
     @Override
@@ -117,7 +122,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
         (new GetAllMealsMapAsyncTask(mealDAO)).execute();
 
         View root = inflater.inflate(R.layout.fragment_map, container, false);
-        SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.google_map);
         mapFragment.getMapAsync(this);
         return root;
     }
@@ -181,6 +186,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
         mGoogleMap = googleMap;
         //mGoogleMap.setOnMarkerClickListener(this);
 
+        if (!sharedPreferences.getBoolean("key_location_switch", false)) {
+            Toast.makeText(getContext(), "You need to activate your position in the application settings in order to see the pins.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if(!mealList.isEmpty()){
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             for(Meal meal : mealList){
@@ -217,7 +227,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
     }
 
     public void setLocationParameters(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mRequestLocationUpdates = sharedPreferences.getBoolean(getResources().getString(R.string.key_location_switch), false);
 
         mLocationRequest = new LocationRequest();
