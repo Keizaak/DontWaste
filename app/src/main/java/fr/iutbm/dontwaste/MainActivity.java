@@ -1,8 +1,10 @@
 package fr.iutbm.dontwaste;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity
 
     private FragmentManager fm = null;
     private Fragment fragment = null;
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (!(sharedPref.getBoolean(getResources().getString(R.string.key_auth), false))) {
+            Intent login = new Intent(this, LoginActivity.class);
+            startActivity(login);
+            this.finish();
+        }
 
         fm = getSupportFragmentManager();
         fragment = new HomeFragment();

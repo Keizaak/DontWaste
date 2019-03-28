@@ -90,7 +90,7 @@ public class DataFragment extends Fragment {
         //recyclerView.setAdapter(new MealListAdapter(mealList));
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        if (!(sharedPref.getBoolean(getResources().getString(R.string.key_initbdd), false))) {
+        if (!(sharedPref.getBoolean(getResources().getString(R.string.key_init_bdd), false))) {
             prepareMealData();
             sharedPref.edit().putBoolean("key_init_bdd", true).apply();
         }
