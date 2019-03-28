@@ -1,4 +1,15 @@
 <resources>
+    <!--Do not translate-->
+    <string name="key_search_delay">key_search_delay</string>
+    <string name="key_search_radius">key_search_radius</string>
+    <string name="key_location_switch">key_location_switch</string>
+    <string name="key_init_bdd">key_init_bdd</string>
+    <string name="key_auth">key_auth</string>
+    <string name="key_user_email">key_user_email</string>
+    <string name="key_latitude">key_latitude</string>
+    <string name="key_longitude">key_longitude</string>
+    <!---->
+
     <string name="app_name">Don\'t Waste</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -48,13 +59,9 @@
     <string name="pref_search_delay_edit_text">Search delay</string>
     <!---->
 
-    <!--Do not translate-->
-    <string name="key_search_delay">key_search_delay</string>
-    <string name="key_search_radius">key_search_radius</string>
-    <string name="key_location_switch">key_location_switch</string>
-    <string name="key_init_bdd">key_init_bdd</string>
-    <string name="key_auth">key_auth</string>
-    <string name="key_user_email">key_user_email</string>
-    <!---->
+    <string name="description_image_view_add_meal">Image of the meal</string>
+    <string name="choose_meal_picture">Choose Meal Picture</string>
+    <string name="button_post">Post !</string>
+
 
 </resources>

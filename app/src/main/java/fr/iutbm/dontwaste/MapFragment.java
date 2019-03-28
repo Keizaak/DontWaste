@@ -222,7 +222,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mRequestLocationUpdates = sharedPreferences.getBoolean(getResources().getString(R.string.key_location_switch), false);
 
-
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval((long) Double.parseDouble(sharedPreferences.getString(getResources().getString(R.string.key_search_delay), "100")));
     }
@@ -250,6 +249,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
             LatLng userPos = new LatLng(location.getLatitude(), location.getLongitude());
             mGoogleMap.addMarker(new MarkerOptions().position(userPos).title("You").icon(BitmapDescriptorFactory.defaultMarker(150f)));
             builder.include(userPos);
+
+            // Save position for AddMeal
+            sharedPreferences.edit().putFloat("key_latitude", (float) location.getLatitude()).apply();
+            sharedPreferences.edit().putFloat("key_longitude", (float) location.getLongitude()).apply();
 
             for(Meal meal : mealList){
                 LatLng pos = new LatLng(meal.getLatitude(), meal.getLongitude());
