@@ -1,6 +1,7 @@
 package fr.iutbm.dontwaste;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -14,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,8 @@ public class DataFragment extends Fragment {
 
     private AppDatabase appdb;
     private MealDAO mealDAO;
+
+    private Button addMealButton;
 
     public DataFragment() {
         // Required empty public constructor
@@ -86,7 +90,16 @@ public class DataFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL));
-        //recyclerView.setAdapter(new MealListAdapter(mealList));
+        recyclerView.setAdapter(new MealListAdapter(mealList, this.getContext()));
+
+        addMealButton = (Button) root.findViewById(R.id.add_meal);
+        addMealButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentAddMeal = new Intent(getContext(), AddNewMeal.class);
+                startActivity(intentAddMeal);
+            }
+        });
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!(sharedPref.getBoolean(getResources().getString(R.string.key_init_bdd), false))) {

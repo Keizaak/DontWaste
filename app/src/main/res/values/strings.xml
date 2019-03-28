@@ -27,24 +27,7 @@
     <string name="title_activity_settings">Settings</string>
 
     <string name="new_meal_button">Add a new meal</string>
-
-    <!-- Strings related to Settings -->
-    <string name="pref_header_general">Location</string>
-
-    <string name="pref_location_switch">Location enabled</string>
-    <string name="pref_search_radius_edit_text">Search radius</string>
-    <string name="pref_search_delay_edit_text">Search delay</string>
-
-    <!--Do not translate-->
-    <string name="key_search_delay">key_search_delay</string>
-    <string name="key_search_radius">key_search_radius</string>
-    <string name="key_location_switch">key_location_switch</string>
-
-    <string name="key_init_bdd">key_init_bdd</string>
-
-    <string name="key_auth">key_auth</string>
-    <string name="key_user_email">key_user_email</string>
-    <!---->
+    <string name="title_add_new_meal">Add a new meal</string>
 
     <!-- Strings related to login -->
     <string name="title_activity_login">Sign in</string>
@@ -56,6 +39,22 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <!---->
+
+    <!-- Strings related to Settings -->
+    <string name="pref_header_general">Location</string>
+    <string name="pref_location_switch">Location enabled</string>
+    <string name="pref_search_radius_edit_text">Search radius</string>
+    <string name="pref_search_delay_edit_text">Search delay</string>
+    <!---->
+
+    <!--Do not translate-->
+    <string name="key_search_delay">key_search_delay</string>
+    <string name="key_search_radius">key_search_radius</string>
+    <string name="key_location_switch">key_location_switch</string>
+    <string name="key_init_bdd">key_init_bdd</string>
+    <string name="key_auth">key_auth</string>
+    <string name="key_user_email">key_user_email</string>
+    <!---->
+
 </resources>
