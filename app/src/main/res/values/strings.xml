@@ -6,8 +6,12 @@
     <string name="key_init_bdd">key_init_bdd</string>
     <string name="key_auth">key_auth</string>
     <string name="key_user_email">key_user_email</string>
+
+    <!--TODO : remove-->
     <string name="key_latitude">key_latitude</string>
     <string name="key_longitude">key_longitude</string>
+    <!---->
+
     <!---->
 
     <string name="app_name">Don\'t Waste</string>
@@ -60,7 +64,7 @@
     <!---->
 
     <string name="description_image_view_add_meal">Image of the meal</string>
-    <string name="choose_meal_picture">Choose Meal Picture</string>
+    <string name="take_meal_picture">Take Meal Picture</string>
     <string name="button_post">Post !</string>
 
 
