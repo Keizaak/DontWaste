@@ -6,30 +6,36 @@
     android:paddingRight="16dp"
     android:orientation="vertical" >
 
-    <!--<EditText-->
-        <!--android:id="@+id/txtTo"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="To" />-->
-
-    <EditText
-        android:id="@+id/txtSubject"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Subject" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/txtMessage"
+        <EditText
+            android:id="@+id/txtSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Subject" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="top"
-        android:hint="Message" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/txtMessage"
+            android:layout_width="match_parent"
+            android:layout_height="292dp"
+            android:hint="Message" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/btnSend"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="Send" />
+        android:backgroundTint="#008577"
+        android:text="Send"
+        android:textColor="@android:color/white" />
 </LinearLayout>
