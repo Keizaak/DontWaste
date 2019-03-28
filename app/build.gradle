@@ -36,4 +36,6 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
 
     implementation 'com.google.android.gms:play-services:11.4.2'
+
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
 }

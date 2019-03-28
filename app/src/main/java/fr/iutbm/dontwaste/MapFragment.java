@@ -31,6 +31,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ import java.util.List;
  * Use the {@link MapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, GoogleMap.OnMarkerClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -184,7 +185,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        //mGoogleMap.setOnMarkerClickListener(this);
+        mGoogleMap.setOnMarkerClickListener(this);
 
         if (!sharedPreferences.getBoolean("key_location_switch", false)) {
             Toast.makeText(getContext(), "You need to activate your position in the application settings in order to see the pins.", Toast.LENGTH_SHORT).show();
@@ -280,6 +281,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 200));
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        new DirectionsAsyncTask(this.getContext(), this.mLastLocation, marker.getPosition(), mGoogleMap).execute();
+        return false;
     }
 
     /**
