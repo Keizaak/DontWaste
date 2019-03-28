@@ -249,7 +249,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
             builder.include(userPos);
 
             // Save position for AddMeal
-            // TODO : remove
             sharedPreferences.edit().putFloat("key_latitude", (float) location.getLatitude()).apply();
             sharedPreferences.edit().putFloat("key_longitude", (float) location.getLongitude()).apply();
 

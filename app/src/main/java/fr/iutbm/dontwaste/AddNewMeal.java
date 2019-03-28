@@ -49,7 +49,7 @@ public class AddNewMeal extends AppCompatActivity {
 
     private MealDAO mealDAO;
 
-    Uri pictureUri;
+    Uri pictureUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,11 +126,11 @@ public class AddNewMeal extends AppCompatActivity {
 
     private File createImageFile() {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String nomFichierImage = "DONTWASTE_" + timeStamp;
-        File dossierStockage = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), PHOTO_FOLDER + "/");
-        if (!dossierStockage.exists())
-            dossierStockage.mkdir();
-        return new File(dossierStockage, nomFichierImage + ".jpg");
+        String imageFileName = "DONTWASTE_" + timeStamp;
+        File storageFolder = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), PHOTO_FOLDER + "/");
+        if (!storageFolder.exists())
+            storageFolder.mkdir();
+        return new File(storageFolder, imageFileName + ".jpg");
     }
 
     private void onImageCaptureResult() throws IOException {
@@ -183,7 +183,25 @@ public class AddNewMeal extends AppCompatActivity {
 
     private void post() {
         String mealName = editTextMealName.getText().toString();
-        float mealPrice =  Float.parseFloat(editTextPrice.getText().toString());
+        float mealPrice =  -1.0f;
+
+        if (mealName.trim().equals("")) {
+            editTextMealName.setError("You must enter a meal name !");
+            return;
+        }
+
+        if (editTextPrice.getText().toString().trim().equals("")) {
+            editTextPrice.setError("You must enter a meal price !");
+            return;
+        }
+        else {
+            mealPrice = Float.parseFloat(editTextPrice.getText().toString());
+        }
+
+        if (pictureUri == null || pictureUri.getPath().equals("")) {
+            Toast.makeText(this, "You must take a picture in order to post your meal !", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String email = sharedPref.getString("key_user_email", "email");
         float latitude = sharedPref.getFloat("key_latitude", 0.0f);
