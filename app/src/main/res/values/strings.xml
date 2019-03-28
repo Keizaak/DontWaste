@@ -41,6 +41,7 @@
     <string name="key_init_bdd">key_init_bdd</string>
 
     <string name="key_auth">key_auth</string>
+    <string name="key_user_email">key_user_email</string>
     <!---->
 
     <!-- Strings related to login -->

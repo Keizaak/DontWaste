@@ -165,13 +165,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -201,7 +194,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
                 builder.include(pos);
                 LatLngBounds bounds = builder.build();
                 mGoogleMap.addMarker(new MarkerOptions().position(pos).title(meal.getMealName()).alpha(0.5f).snippet(meal.getPrice() + " €"));
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
             }
         }
     }
@@ -212,10 +205,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
             requestLocationPermission();
         } else {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if(mLastLocation != null){
+            /*if(mLastLocation != null){
                 LatLng userPos = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 mGoogleMap.addMarker(new MarkerOptions().position(userPos).title("You").icon(BitmapDescriptorFactory.defaultMarker(150f)));
-            }
+            }*/
         }
 
         if(mRequestLocationUpdates){
@@ -260,6 +253,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
             LatLng userPos = new LatLng(location.getLatitude(), location.getLongitude());
             mGoogleMap.addMarker(new MarkerOptions().position(userPos).title("You").icon(BitmapDescriptorFactory.defaultMarker(150f)));
+            builder.include(userPos);
 
             for(Meal meal : mealList){
                 LatLng pos = new LatLng(meal.getLatitude(), meal.getLongitude());
@@ -278,7 +272,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
                 mGoogleMap.addMarker(markerOptions);
             }
 
-            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 100));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 200));
         }
     }
 
