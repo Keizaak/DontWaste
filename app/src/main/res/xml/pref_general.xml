@@ -7,7 +7,7 @@
 
     <EditTextPreference
         android:defaultValue="100"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:title="@string/pref_search_delay_edit_text"
         android:key="@string/key_search_delay"
         android:maxLines="1"
@@ -17,7 +17,7 @@
 
     <EditTextPreference
         android:defaultValue="10"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:title="@string/pref_search_radius_edit_text"
         android:key="@string/key_search_radius"
         android:maxLines="1"

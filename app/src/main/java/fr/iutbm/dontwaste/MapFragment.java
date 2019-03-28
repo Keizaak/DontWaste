@@ -235,7 +235,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
 
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(Integer.parseInt(sharedPreferences.getString(getResources().getString(R.string.key_search_delay), "100")));
+        mLocationRequest.setInterval((long) Double.parseDouble(sharedPreferences.getString(getResources().getString(R.string.key_search_delay), "100")));
     }
 
     @Override
@@ -253,7 +253,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         if(location != null){
-            int radius = Integer.parseInt(sharedPreferences.getString(getResources().getString(R.string.key_search_radius), "100"));
+            double radius = Double.parseDouble(sharedPreferences.getString(getResources().getString(R.string.key_search_radius), "100"));
 
             mGoogleMap.clear();
             LatLngBounds.Builder builder = LatLngBounds.builder();
