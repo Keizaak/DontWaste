@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class ContactFormView extends AppCompatActivity {
-    private EditText textTo;
     private EditText textSubject;
     private EditText textMessage;
 
@@ -31,17 +30,16 @@ public class ContactFormView extends AppCompatActivity {
     }
 
     private void sendMail(){
-        String sendTo = "testemailaddress@testtest.com";
         String subject = textSubject.getText().toString();
         String message = textMessage.getText().toString();
 
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("message/rfc822");
+        intent.setType("text/plain");
 
-        intent.putExtra(Intent.EXTRA_EMAIL, sendTo);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"dontwaste.devteam@gmail.com"});
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
         
-        startActivity(Intent.createChooser(intent, "Contact mail"));
+        startActivity(Intent.createChooser(intent, "Choose an email app :"));
     }
 }

@@ -258,7 +258,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
             mGoogleMap.addMarker(new MarkerOptions().position(userPos).title("You").icon(BitmapDescriptorFactory.defaultMarker(150f)));
             builder.include(userPos);
 
-            // Save position for AddMeal
+            // Save position for AddNewMeal
             sharedPreferences.edit().putFloat("key_latitude", (float) location.getLatitude()).apply();
             sharedPreferences.edit().putFloat("key_longitude", (float) location.getLongitude()).apply();
 
@@ -285,7 +285,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        new DirectionsAsyncTask(this.getContext(), this.mLastLocation, marker.getPosition(), mGoogleMap).execute();
+        if(mLastLocation != null) {
+            new DirectionsAsyncTask(this.getContext(), this.mLastLocation, marker.getPosition(), mGoogleMap).execute();
+        }
         return false;
     }
 
